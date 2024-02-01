@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: "Bangers", system-ui;
+}
+
+.memory-game {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 20px;
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(198, 198, 198);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+i {
+    font-size: 80px;
+    color: transparent;
+}
+
+.card.flipped {
+    background-color: #43fff2;
+}
+
+.card.flipped i {
+    color: #282828;
+    transition: color 0.3s ease-in-out;
+}
+
+.card.matched {
+    background-color: #2fff63;
+}
