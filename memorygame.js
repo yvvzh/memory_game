@@ -1,9 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const lifePoints = document.getElementById("life-points");
     const memoryGame = document.querySelector(".memory-game");
     const cardModels = ["bxs-invader", "bxs-cat", "bxs-dog", "bxs-cool", "bxs-virus", "bxs-bowl-rice", "bxs-party", "bxs-ghost"];
     const cards = cardModels.concat(cardModels);
+    let lives = 5;
     let openedCards = [];
     let matchedCards = [];
+
+    // Initial life points display
+    lifePoints.innerText = lives;
 
     // Shuffle the cards
     cards.sort(() => Math.random() - 0.5);
@@ -19,6 +24,15 @@ document.addEventListener("DOMContentLoaded", function () {
         cardElement.appendChild(cardIcon);
         memoryGame.appendChild(cardElement);
     });
+
+    function lifePointsManager() {
+        lives--;
+        lifePoints.innerText = lives;
+        if (lives === 0) {
+            alert("You lost :/");
+            location.reload();
+        }
+    }
 
     function flipCard() {
         const clickedIndex = this.dataset.index;
@@ -48,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Not matched
             card1.classList.remove("flipped");
             card2.classList.remove("flipped");
+            lifePointsManager();
         }
 
         openedCards = [];
