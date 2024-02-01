@@ -1,36 +1,71 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const lifePoints = document.getElementById("life-points");
+    const lifePointsDisplay = document.getElementById("life-points");
+    const difficultySelector = document.getElementById("difficulty");
+    const startBtn = document.getElementById("start-btn");
+    const gameContainer = document.getElementById("game-container");
+    const replayBtn = document.getElementById("replay");
     const memoryGame = document.querySelector(".memory-game");
     const cardModels = ["bxs-invader", "bxs-cat", "bxs-dog", "bxs-cool", "bxs-virus", "bxs-bowl-rice", "bxs-party", "bxs-ghost"];
     const cards = cardModels.concat(cardModels);
-    let lives = 5;
+    let lives;
     let openedCards = [];
     let matchedCards = [];
 
-    // Initial life points display
-    lifePoints.innerText = lives;
+    startBtn.addEventListener("click", startGame);
+    replayBtn.addEventListener("click", replay);
 
-    // Shuffle the cards
-    cards.sort(() => Math.random() - 0.5);
+    function startGame() {
+        const selectedDifficulty = difficultySelector.value;
 
-    // Create card elements and add them to the memory game
-    cards.forEach((card, index) => {
-        const cardElement = document.createElement("div");
-        cardElement.classList.add("card");
-        cardElement.dataset.index = index;
-        const cardIcon = document.createElement("i");
-        cardIcon.classList.add("bx", card);
-        cardElement.addEventListener("click", flipCard);
-        cardElement.appendChild(cardIcon);
-        memoryGame.appendChild(cardElement);
-    });
+        // Set lives based on difficulty
+        switch (selectedDifficulty) {
+            case "easy":
+                lives = 15;
+                break;
+            case "medium":
+                lives = 10;
+                break;
+            case "hard":
+                lives = 5;
+                break;
+            default:
+                lives = 10; // Default to medium difficulty
+        }
+
+        // Initial life points display
+        lifePointsDisplay.innerText = lives;
+
+        // Shuffle the cards
+        cards.sort(() => Math.random() - 0.5);
+
+        // Create card elements and add them to the memory game
+        cards.forEach((card, index) => {
+            const cardElement = document.createElement("div");
+            cardElement.classList.add("card");
+            cardElement.dataset.index = index;
+            const cardIcon = document.createElement("i");
+            cardIcon.classList.add("bx", card);
+            cardElement.addEventListener("click", flipCard);
+            cardElement.appendChild(cardIcon);
+            memoryGame.appendChild(cardElement);
+        });
+
+        gameContainer.classList.remove("hidden");
+        document.querySelector(".difficulty-selector").classList.add("hidden");
+    }
+
+    function replay() {
+        location.reload();
+    }
 
     function lifePointsManager() {
         lives--;
-        lifePoints.innerText = lives;
         if (lives === 0) {
-            alert("You lost :/");
-            location.reload();
+            document.getElementById("replay-text").innerText = "You lost :/";
+            gameContainer.classList.add("hidden");
+            document.querySelector(".replay").classList.remove("hidden");
+        } else {
+            lifePointsDisplay.innerText = lives;
         }
     }
 
@@ -69,7 +104,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Check if all cards are matched
         if (matchedCards.length === cards.length) {
-            alert("Congratulations! You matched all the pairs.");
+            document.getElementById("replay-text").innerText = "You WON :)";
+            gameContainer.classList.add("hidden");
+            document.querySelector(".replay").classList.remove("hidden");
         }
     }
 });

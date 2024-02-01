@@ -5,9 +5,48 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     height: 100vh;
     margin: 0;
     font-family: "Workbench", sans-serif;
+}
+
+.replay {
+    font-size: 100px;
+}
+
+#replay {
+    font-size: 40px;
+}
+
+.hidden {
+    display: none;
+}
+
+.difficulty-selector {
+    font-size: 20px;
+}
+
+#difficulty {
+    width: 100px;
+    height: 26px;
+    font-size: 20px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+button {
+    background-color: #c6c6c6;
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
+    font-family: "Workbench", sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2fff63;
 }
 
 .life-points-container {

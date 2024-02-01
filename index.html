@@ -8,10 +8,27 @@
         <title>Memory Game</title>
     </head>
     <body>
-        <div class="life-points-container">
-            <p>Lives: <span id="life-points"></span></p>
+        <div class="difficulty-selector">
+            <label for="difficulty">Select Difficulty:</label>
+            <select id="difficulty" name="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+            <button id="start-btn">Start Game</button>
         </div>
-        <div class="memory-game"></div>
+
+        <div id="game-container" class="hidden">
+            <div class="life-points-container">
+                <p>Lives: <span id="life-points"></span></p>
+            </div>
+            <div class="memory-game"></div>
+        </div>
+
+        <div class="replay hidden">
+            <p id="replay-text"></p>
+            <button id="replay">Replay ?</button>
+        </div>
 
         <script src="memorygame.js"></script>
     </body>
